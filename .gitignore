@@ -1,0 +1,9 @@
+﻿################################################################################
+# 此 .gitignore 文件已由 Microsoft(R) Visual Studio 自动创建。
+################################################################################
+
+/.vs/Sample.WebApi/v15/Server/sqlite3
+/Sample.WebApi/bin
+/Sample.WebApi/obj
+/Sample.WebApi.xUnit/bin/Debug/netcoreapp2.2
+/Sample.WebApi.xUnit/obj
