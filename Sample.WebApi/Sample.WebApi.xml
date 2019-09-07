@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Sample.WebApi</name>
+    </assembly>
+    <members>
+        <member name="M:Sample.WebApi.Controllers.ValuesController.GetId(System.Int32)">
+            <summary>
+            获取Id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sample.WebApi.Controllers.ValuesController.GetSum(System.Int32,System.Int32)">
+            <summary>
+            求和
+            </summary>
+            <param name="num1"></param>
+            <param name="num2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sample.WebApi.Controllers.ValuesController.PostInfo(Sample.WebApi.Models.Request.InfoParam)">
+            <summary>
+            post 获取 Id
+            </summary>
+            <param name="param"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
