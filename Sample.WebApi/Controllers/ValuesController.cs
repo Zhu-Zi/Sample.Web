@@ -4,34 +4,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using Sample.WebApi.Models.Request;
 using Microsoft.AspNetCore.Mvc;
-using Dapper;
 using Sample.WebApi.Context;
 using Sample.WebApi.Entities;
-using System.Data;
-using MySql.Data.MySqlClient;
 
 namespace Sample.WebApi.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ValuesController : ControllerBase
+    public class ValuesController : BaseController
     {
         private readonly ApplicationDbContext _context;
 
         public ValuesController(ApplicationDbContext context)
         {
             _context = context;
-        }
-
-        /// <summary>
-        /// 获取Id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [HttpGet("{id}")]
-        public async Task<string> GetId(int id)
-        {
-            return await Task.Run(() => { return id.ToString(); });
         }
 
         /// <summary>
@@ -42,29 +26,35 @@ namespace Sample.WebApi.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("GetSum")]
-        public async Task<int> GetSum(int num1, int num2)
+        public async Task<IActionResult> GetSum(int num1, int num2)
         {
-            return await Task.Run(() => { return (num1 + num2); });
+            return await Task.Run(() =>
+            {
+                return Ok(Success((num1 + num2).ToString(), DateTime.UtcNow));
+            });
         }
 
         /// <summary>
-        /// post 获取 Id
+        /// post 插入数据 
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
         [HttpPost]
-        [Route("PostInfo")]
-        public async Task<string> PostInfo([FromBody]InfoParam param)
+        [Route("InsertInfo")]
+        public async Task<IActionResult> InsertInfo([FromBody]InfoParam param)
         {
-            return await Task.Run(() => 
+            return await Task.Run(() =>
             {
-                var info = new InfoTest();
+                var info = new InfoTest
+                {
+                    Name = param.Name,
+                    Remark = param.Remark
+                };
 
-                info.Name = param.Name;
-                info.Remark = param.Remark;
-                
                 _context.InfoTest.Add(info);
-                return _context.SaveChanges().ToString();
+                var num = _context.SaveChanges().ToString();
+
+                return Ok(Success(num, DateTime.UtcNow));
             });
         }
     }

@@ -12,10 +12,13 @@ namespace Sample.WebApi.AppConfig
 
         static AppConfig()
         {
+#if DEBUG
+            // 测试用
+            var evnName = "DEV";  
+#else
             // Microsoft.Extensions.Configuration 扩展包提供的
             var evnName = Environment.GetEnvironmentVariable("INSIGHT_ENV");
-            // 测试用
-            //var evnName = "DEV";
+#endif
             var builder = new ConfigurationBuilder()
                 .AddJsonFile($"appsettings.{evnName}.json", optional: false)
                 .AddEnvironmentVariables();

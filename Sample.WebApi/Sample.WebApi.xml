@@ -4,12 +4,10 @@
         <name>Sample.WebApi</name>
     </assembly>
     <members>
-        <member name="M:Sample.WebApi.Controllers.ValuesController.GetId(System.Int32)">
+        <member name="T:Sample.WebApi.Controllers.BaseController">
             <summary>
-            获取Id
+            Api 控制器基类
             </summary>
-            <param name="id"></param>
-            <returns></returns>
         </member>
         <member name="M:Sample.WebApi.Controllers.ValuesController.GetSum(System.Int32,System.Int32)">
             <summary>
@@ -19,12 +17,42 @@
             <param name="num2"></param>
             <returns></returns>
         </member>
-        <member name="M:Sample.WebApi.Controllers.ValuesController.PostInfo(Sample.WebApi.Models.Request.InfoParam)">
+        <member name="M:Sample.WebApi.Controllers.ValuesController.InsertInfo(Sample.WebApi.Models.Request.InfoParam)">
             <summary>
-            post 获取 Id
+            post 插入数据 
             </summary>
             <param name="param"></param>
             <returns></returns>
+        </member>
+        <member name="F:Sample.WebApi.Enums.HttpStatus.OK">
+            <summary>
+            成功
+            </summary>
+        </member>
+        <member name="F:Sample.WebApi.Enums.HttpStatus.Unauthorized">
+            <summary>
+            无权限访问
+            </summary>
+        </member>
+        <member name="F:Sample.WebApi.Enums.HttpStatus.NotFound">
+            <summary>
+            地址不存在
+            </summary>
+        </member>
+        <member name="F:Sample.WebApi.Enums.HttpStatus.InternalServerError">
+            <summary>
+            操作失败
+            </summary>
+        </member>
+        <member name="P:Sample.WebApi.Models.Response.ResponseBaseModel.Head">
+            <summary>
+            API接口 返回结果头部
+            </summary>
+        </member>
+        <member name="P:Sample.WebApi.Models.Response.ResponseModel`1.Result">
+            <summary>
+            API接口 返回结果
+            </summary>
         </member>
     </members>
 </doc>
