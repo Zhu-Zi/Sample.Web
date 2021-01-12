@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.Swagger;
+using Sample.WebApi.Context;
 
 namespace Sample.WebApi
 {
@@ -26,7 +28,7 @@ namespace Sample.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             ////添加Swagger.
             //services.AddSwaggerGen(c =>
             //{
@@ -39,6 +41,10 @@ namespace Sample.WebApi
                 // 添加xml文件
                 c.IncludeXmlComments(Path.Combine(Directory.GetCurrentDirectory(), "Sample.WebAPI.XML"));
             });
+
+            var conn = AppConfig.AppConfig.GetConnectionString("MySQLConnection");
+            services.AddDbContext<ApplicationDbContext>(
+                options => options.UseMySQL(AppConfig.AppConfig.GetConnectionString("MySQLConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

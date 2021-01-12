@@ -4,6 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Sample.WebApi.Models.Request;
 using Microsoft.AspNetCore.Mvc;
+using Dapper;
+using Sample.WebApi.Context;
+using Sample.WebApi.Entities;
+using System.Data;
+using MySql.Data.MySqlClient;
 
 namespace Sample.WebApi.Controllers
 {
@@ -11,6 +16,13 @@ namespace Sample.WebApi.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        private readonly ApplicationDbContext _context;
+
+        public ValuesController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
         /// <summary>
         /// 获取Id
         /// </summary>
@@ -44,7 +56,16 @@ namespace Sample.WebApi.Controllers
         [Route("PostInfo")]
         public async Task<string> PostInfo([FromBody]InfoParam param)
         {
-            return await Task.Run(() => { return param.Id.ToString(); });
+            return await Task.Run(() => 
+            {
+                var info = new InfoTest();
+
+                info.Name = param.Name;
+                info.Remark = param.Remark;
+                
+                _context.InfoTest.Add(info);
+                return _context.SaveChanges().ToString();
+            });
         }
     }
 }
