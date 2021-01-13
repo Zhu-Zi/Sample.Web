@@ -24,6 +24,13 @@
             <param name="param"></param>
             <returns></returns>
         </member>
+        <member name="M:Sample.WebApi.Controllers.ValuesController.SaveData(Sample.WebApi.Entities.InfoTest)">
+            <summary>
+            保存数据
+            </summary>
+            <param name="info">数据</param>
+            <returns></returns>
+        </member>
         <member name="F:Sample.WebApi.Enums.HttpStatus.OK">
             <summary>
             成功

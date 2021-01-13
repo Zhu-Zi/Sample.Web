@@ -51,11 +51,32 @@ namespace Sample.WebApi.Controllers
                     Remark = param.Remark
                 };
 
+                return SaveData(info);
+            });
+        }
+
+        #region private function
+
+        /// <summary>
+        /// 保存数据
+        /// </summary>
+        /// <param name="info">数据</param>
+        /// <returns></returns>
+        private IActionResult SaveData(InfoTest info)
+        {
+            try
+            {
                 _context.InfoTest.Add(info);
                 var num = _context.SaveChanges().ToString();
 
-                return Ok(Success(num, DateTime.UtcNow));
-            });
+                return Ok(Success($"Lines:{num}", $"UtcDatetime:{DateTime.UtcNow:yyyy-MM-dd HH:mm:ss}"));
+            }
+            catch
+            {
+                return BadRequest(Failure("Failure", $"UtcDatetime:{DateTime.UtcNow:yyyy-MM-dd HH:mm:ss}"));
+            }
         }
+
+        #endregion
     }
 }
