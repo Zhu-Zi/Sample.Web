@@ -57,19 +57,20 @@ namespace Sample.WebApi
             }
 
             app.UseMvc();
-            //配置Swagger
+            // 配置Swagger
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "DemoAPI V1");
             });
 
+            // 配置静态文件
             app.UseStaticFiles();
             app.UseStaticFiles(new StaticFileOptions()
             {
                 FileProvider = new PhysicalFileProvider(
-                    Path.Combine(Directory.GetCurrentDirectory(), @"./StaticFiles/")), //用于定位资源的文件系统
-                RequestPath = new PathString("/.well-known/pki") //请求地址
+                    Path.Combine(Directory.GetCurrentDirectory(), @"./StaticFiles/")), //静态文件目录路径
+                    RequestPath = new PathString("/staticfiles/myfiles") //静态文件目录请求地址
             });
         }
     }
